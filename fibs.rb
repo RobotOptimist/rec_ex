@@ -20,9 +20,11 @@ fibs(2) #=> [1,2]
 fibs(3) #=> [1,2,3]
 fibs(4) #=> [1,2,3,5]
 
-def fibs_rec(n, fib = [1,2])
-	until (fib[-1] + fib[-2]) == n do
-	
+def fibs_rec(n, x = 1, y = 2, fib = [1])
+	return fib if fib.size >= n
+	fib << y
+	fibs_rec(n, fib[-1], (fib[-1] + x), fib)
 end
 
-fibs_rec(5)
+p fibs_rec(5)
+p fibs_rec(10)
