@@ -1,30 +1,36 @@
 class Mergin
 
 	def merge(b,c)
-		ap = 0; bp = 0; cp = 0
-		until cp > c.length or bp > b.length do
-			if b[bp] < c[cp]
-				a[ap] = b[bp]; bp += 1; ap += 1
-			else
-				a[ap] = c[cp]; cp += 1; ap += 1
+		arr = []
+		
+		until b.empty? || c.empty? do
+			if b[0] <= c[0]
+				arr << b.shift
+			elsif c[0] < b[0]
+				arr << c.shift
 			end
 		end
-		p a
+		
+		arr + b + c
 	end
 
 	def merge_sort(arr)
-		if arr.length > 1
-			half = arr.length / 2
-			b = arr[0, half]
-			c = arr[half, arr.length]
-			merge_sort(b)
-			merge_sort(c)
-			merge(b,c)
-		end			
+		return arr if arr.length <= 1
+		
+		half = arr.length / 2
+		x = arr[0,half]
+		y = arr[half,arr.length]
+		
+		
+		b = merge_sort(x)
+		c = merge_sort(y)
+		
+		merge(b,c)
 	end
 end
 
 um = Mergin.new
-um.merge_sort([1,2,3,4])
-um.merge_sort([1,2,3])
-um.merge_sort([1,2])
+#p um.merge_sort([4,2,3,1])
+#p um.merge_sort([3,1,2])
+#p um.merge_sort([2,5]) 
+p um.merge_sort([8,2,5,7,90,104,1,2,22])
